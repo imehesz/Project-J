@@ -5,10 +5,12 @@
 		 */
 
 		require_once(dirname(__FILE__) . '/protected/vendors/doctrine/Doctrine.php');
+		$config = require_once(dirname(__FILE__) . '/protected/config/development.php');
+
 		spl_autoload_register(array('Doctrine', 'autoload'));
 		$manager = Doctrine_Manager::getInstance();
 
-		$dsn = 'sqlite:' . dirname( __FILE__ ) . '/protected/data/projectj.sqlite';
+		$dsn = $config['components']['db']['connectionString'];
 
 		$dbh = new PDO($dsn);
 		$conn = Doctrine_Manager::connection($dbh);
