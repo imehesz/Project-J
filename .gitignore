@@ -5,3 +5,5 @@ protected/runtime/*
 *.~
 *.swp
 *.swo
+*.sqlite
+development.php
