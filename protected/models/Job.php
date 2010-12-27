@@ -21,6 +21,13 @@
  */
 class Job extends CActiveRecord
 {
+    const INHOUSE   = 'IH';
+    const FULLTIME  = 'FT';
+    const PARTTIME  = 'PT';
+    const REMOTE    = 'RM';
+    const FREELANCE = 'FL';
+    const CONTRACT  = 'CO';
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Job the static model class
@@ -134,4 +141,75 @@ class Job extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function scopes()
+    {
+        return array(
+            /**
+             * a job only considered active if the 
+             * status is 1 and the expires_at timestamp is larger
+             * than the current timestamp
+             */
+            'active'    => array( 
+                            'condition' => 'status=1 AND expires_at>' . time(),
+                            'order'     => 'featured DESC, created_at DESC'
+                           )
+        );
+    }
+
+    /**
+     * return all the jobs that have a specific PHP-typ
+     *
+     * @param $type string
+     *
+     * @return object DbCriteria
+     */
+    public function phptype( $type )
+    {
+        if( $type  )
+        {
+            $this->getDbCriteria()->mergeWith( array(
+                'condition' => 'php_type="' . $type . '"'
+            ) );
+        }
+
+        return $this;
+    }
+
+    /**
+     * returns all the jobs that have a specific job-type or job-types
+     *
+     * @param $type string|array
+     *
+     * @return object DbCriteria
+     */
+    public function jobtype( $type = null )
+    {
+        if( $type )
+        {
+            if( is_array( $type ) )
+            {
+                for( $i=0; $i<sizeof($type);$i++ )
+                {
+                    $t .= 'job_type LIKE ("%' .$type[$i]. '%") AND ';
+                }
+
+                $this->getDbCriteria()->mergeWith(
+                    array(
+                        'condition' => $t . ' 1==1'
+                    )
+                );
+            }
+            else
+            {
+                $this->getDbCriteria()->mergeWith(
+                    array(
+                        'condition' => 'job_type LIKE ("%' . $type  . '%")'
+                    )
+                );
+            }
+        }
+
+        return $this;
+    }
 }
