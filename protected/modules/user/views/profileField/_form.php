@@ -76,10 +76,10 @@
 		<p class="hint"><?php echo UserModule::t('JSON string (example: {example}).',array('{example}'=>CJavaScript::jsonEncode(array('file'=>array('types'=>'jpg, gif, png'))))); ?></p>
 	</div>
 
-	<div class="row default">
-		<?php echo CHtml::activeLabelEx($model,'default'); ?>
-		<?php echo (($model->id)?CHtml::activeTextField($model,'default',array('size'=>60,'maxlength'=>255,'readonly'=>true)):CHtml::activeTextField($model,'default',array('size'=>60,'maxlength'=>255))); ?>
-		<?php echo CHtml::error($model,'default'); ?>
+	<div class="row defaults">
+		<?php echo CHtml::activeLabelEx($model,'defaults'); ?>
+		<?php echo (($model->id)?CHtml::activeTextField($model,'defaults',array('size'=>60,'maxlength'=>255,'readonly'=>true)):CHtml::activeTextField($model,'defaults',array('size'=>60,'maxlength'=>255))); ?>
+		<?php echo CHtml::error($model,'defaults'); ?>
 		<p class="hint"><?php echo UserModule::t('The value of the default field (database).'); ?></p>
 	</div>
 

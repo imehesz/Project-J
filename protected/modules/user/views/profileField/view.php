@@ -31,7 +31,7 @@ $this->breadcrumbs=array(
 		'other_validator',
 		'widget',
 		'widgetparams',
-		'default',
+		'defaults',
 		'position',
 		'visible',
 	),

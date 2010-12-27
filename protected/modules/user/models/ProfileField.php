@@ -25,7 +25,7 @@ class ProfileField extends CActiveRecord
 	 * @var string $range
 	 * @var string $error_message
 	 * @var string $other_validator
-	 * @var string $default
+	 * @var string $defaults
 	 * @var integer $position
 	 * @var integer $visible
 	 */
@@ -60,7 +60,7 @@ class ProfileField extends CActiveRecord
 			array('varname', 'unique', 'message' => UserModule::t("This field already exists.")),
 			array('varname, field_type', 'length', 'max'=>50),
 			array('field_size, field_size_min, required, position, visible', 'numerical', 'integerOnly'=>true),
-			array('title, match, error_message, other_validator, default, widget', 'length', 'max'=>255),
+			array('title, match, error_message, other_validator, defaults, widget', 'length', 'max'=>255),
 			array('range, widgetparams', 'length', 'max'=>5000),
 		);
 	}
@@ -93,7 +93,7 @@ class ProfileField extends CActiveRecord
 			'range' => UserModule::t('Range'),
 			'error_message' => UserModule::t('Error Message'),
 			'other_validator' => UserModule::t('Other Validator'),
-			'default' => UserModule::t('Default'),
+			'defaults' => UserModule::t('Defaults'),
 			'widget' => UserModule::t('Widget'),
 			'widgetparams' => UserModule::t('Widget parametrs'),
 			'position' => UserModule::t('Position'),

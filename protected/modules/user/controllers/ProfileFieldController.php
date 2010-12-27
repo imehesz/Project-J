@@ -97,7 +97,7 @@ class ProfileFieldController extends Controller
 				'hide':['match','other_validator','widgetparams'],
 				'val':{
 					'field_size':10,
-					'default':'0',
+					'defaults':'0',
 					'range':'',
 					'widgetparams':''
 				}
@@ -106,7 +106,7 @@ class ProfileFieldController extends Controller
 				'hide':['widgetparams'],
 				'val':{
 					'field_size':255,
-					'default':'',
+					'defaults':'',
 					'range':'',
 					'widgetparams':''
 				}
@@ -115,7 +115,7 @@ class ProfileFieldController extends Controller
 				'hide':['field_size','range','widgetparams'],
 				'val':{
 					'field_size':0,
-					'default':'',
+					'defaults':'',
 					'range':'',
 					'widgetparams':''
 				}
@@ -124,7 +124,7 @@ class ProfileFieldController extends Controller
 				'hide':['field_size','field_size_min','match','range','widgetparams'],
 				'val':{
 					'field_size':0,
-					'default':'0000-00-00',
+					'defaults':'0000-00-00',
 					'range':'',
 					'widgetparams':''
 				}
@@ -133,7 +133,7 @@ class ProfileFieldController extends Controller
 				'hide':['match','other_validator','widgetparams'],
 				'val':{
 					'field_size':'10,2',
-					'default':'0.00',
+					'defaults':'0.00',
 					'range':'',
 					'widgetparams':''
 				}
@@ -142,7 +142,7 @@ class ProfileFieldController extends Controller
 				'hide':['field_size','field_size_min','match','widgetparams'],
 				'val':{
 					'field_size':0,
-					'default':0,
+					'defaults':0,
 					'range':'1==".UserModule::t('Yes').";0==".UserModule::t('No')."',
 					'widgetparams':''
 				}
@@ -151,7 +151,7 @@ class ProfileFieldController extends Controller
 				'hide':['field_size','field_size_min','match','widgetparams'],
 				'val':{
 					'field_size':0,
-					'default':'',
+					'defaults':'',
 					'range':'',
 					'widgetparams':''
 				}
@@ -160,7 +160,7 @@ class ProfileFieldController extends Controller
 				'hide':['field_size','field_size_min','match','widgetparams'],
 				'val':{
 					'field_size':0,
-					'default':'',
+					'defaults':'',
 					'range':'',
 					'widgetparams':''
 				}
@@ -333,8 +333,8 @@ class ProfileFieldController extends Controller
 					$sql .= '('.$model->field_size.')';
 				$sql .= ' NOT NULL ';
 				
-				if ($model->default)
-					$sql .= " DEFAULT '".$model->default."'";
+				if ($model->defaults)
+					$sql .= " DEFAULT '".$model->defaults."'";
 				else
 					$sql .= ((
 								$model->field_type=='TEXT'
