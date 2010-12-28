@@ -37,6 +37,10 @@ class Job extends CActiveRecord
 	const PACKAGE30 = 30;
 	const PACKAGEFEAT = 'FEAT';
 
+    const DAY   = 86400; // a day
+    const WEEK  = 604800; // a week
+    const DAY30 = 2592000; // 30 days
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Job the static model class
@@ -227,33 +231,66 @@ class Job extends CActiveRecord
         return $this;
     }
 
+    /**
+     * we have to set a bunch of stuff before the validation
+     * like: user_id, expiration date ...
+     */
 	public function beforeValidate()
 	{
-		if( $this->isNewRecord )
-		{
-			$this->setAttribute( 'created_at', time() );
-		}
+        if( parent::beforeValidate() )
+        {
+            if( $this->isNewRecord )
+            {
+                $this->setAttribute( 'created_at', time() );
+            }
 
-		return parent::beforeValidate();		
-	}
+            $user_obj = User::model()->findByAttributes( array( 'email' => $this->contact_email ) );
 
-	public function afterValidate()
-	{
-		parent::afterValidate();
+            if( ! $user_obj )
+            {
+                $user_obj = new User;
+                $user_obj->email 	= $this->contact_email;
+                $user_obj->username = substr(  MUtility::strToPretty( $this->contact_email),0,9 ) . time();
 
-		// let's find the user ...
-		$user_obj = User::model()->findByAttributes( array( 'email' => $this->contact_email ) );
-		if( ! $user_obj )
-		{
-			$user_obj = new User;
-			$user_obj->email 	= 'aaa@aaa.com';
-			$user_obj->username = 'aaaaaa' . time();
-			$user_obj->password = time();
-			$user_obj->activkey = 1;
-			$user_obj->status 	= 1;
-			$user_obj->save();
-		}
+                // password is pretty much irrelevant because in the future we create
+                // a new password every time they wanna change something
+                // until then, we don't even need it
+                // TODO implement the above mentioned thing
+                $user_obj->password = md5( time() );
 
-		$this->user_id = $user_obj->id;
+                $user_obj->activkey = 1;
+                $user_obj->status 	= 1;
+                $user_obj->createtime 	= time();
+
+                $user_obj->save( false ) ;
+            }
+
+            $this->user_id = $user_obj->id;
+
+            switch( $this->package_type )
+            {
+                case self::PACKAGE7:
+                                $this->expires_at = $this->created_at + self::WEEK;
+                                break;
+                case self::PACKAGE14:
+                                $this->expires_at = $this->created_at + ( self::WEEK * 2 );
+                                break;
+                case self::PACKAGE30:
+                                $this->expires_at = $this->created_at + self::DAY30;
+                                break;
+                case self::PACKAGEFEAT:
+                                // TODO send an email to me so we can announce the JOB in 
+                                // the podcast
+                                $this->expires_at = $this->created_at + self::DAY30;
+                                $this->featured   = 1;
+                                break;
+                default:
+                                $this->expires_at = $this->created_at + self::DAY;
+            }
+
+            return true;
+        }
+
+        return false;
 	}
 }

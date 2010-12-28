@@ -63,17 +63,30 @@ class JobTest extends CDbTestCase
 	public function testBeforeValidateStuff()
 	{
 		$newjob = new Job;
+		$newjob->setAttribute( 'contact_email', 'test@testamony.com');
+        $newjob->setAttribute( 'company', 'Mehesz.net' );
+        $newjob->setAttribute( 'position', 'Developer' );
 		$newjob->validate();
 
 		$this->assertTrue( $newjob->created_at > strtotime( '04/10/1978 20:00:00' ) );
-	}
+		$this->assertTrue( $newjob->expires_at > strtotime( '04/10/1978 20:00:00' ) );
 
-	public function testAfterValidate()
-	{
-		$newjob = new Job;
-		$newjob->setAttribute( 'contact_email', 'test@testamony.com');
-		$newjob->validate();
-
+        // also the expires_at date cannot be bigger than the created_at + 30 days        
+        $this->assertTrue( $newjob->expires_at < ($newjob->created_at + (60*60*24*30) + 1 ) );
 		$this->assertTrue( $newjob->user_id > 0, 'Wrong `user_id` value!' );
+        $this->assertTrue( $newjob->save() );
+        unset( $newjob );
+
+        // if the package type is featured we need to set the featured tag
+        $newjob2 = new Job;
+        $newjob2->setAttribute( 'contact_email', 'test@testamony.com' );
+        $newjob2->setAttribute( 'company', 'Mehesz.net' );
+        $newjob2->setAttribute( 'position', 'Developer #2' );
+
+        $newjob2->package_type = Job::PACKAGEFEAT;
+		$newjob2->validate();
+
+        $this->assertEquals( $newjob2->featured, 1 );
+        $this->assertTrue( $newjob2->save() );
 	}
 }
