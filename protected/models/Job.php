@@ -16,6 +16,9 @@
  * @property string $location
  * @property string $job_type
  * @property string $php_type
+ * @property string $package_type
+ * @property string $position
+ * @property string $description
  * @property integer $created_at
  * @property integer $expires_at
  */
@@ -27,6 +30,12 @@ class Job extends CActiveRecord
     const REMOTE    = 'RM';
     const FREELANCE = 'FL';
     const CONTRACT  = 'CO';
+
+	const PACKAGE1  = 1;
+	const PACKAGE7 	= 7;
+	const PACKAGE14 = 14;
+	const PACKAGE30 = 30;
+	const PACKAGEFEAT = 'FEAT';
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -53,14 +62,17 @@ class Job extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('company, company_link, contact_email, logo, confidential, featured, location, job_type, php_type', 'required'),
+			array('company, contact_email, position', 'required'),
+			array('contact_email', 'email' ),
 			array('user_id, status, confidential, featured, created_at, expires_at', 'numerical', 'integerOnly'=>true),
 			array('company, contact_email, logo', 'length', 'max'=>100),
 			array('company_link, location, job_type', 'length', 'max'=>255),
+			array('description', 'length', 'max'=>10000),
 			array('php_type', 'length', 'max'=>20),
+			array('package_type', 'length', 'max'=>5),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, user_id, company, company_link, contact_email, status, logo, confidential, featured, location, job_type, php_type, created_at, expires_at', 'safe', 'on'=>'search'),
+			array('id, user_id, company, company_link, contact_email, status, logo, confidential, featured, location, job_type, php_type, created_at, expires_at, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -189,6 +201,8 @@ class Job extends CActiveRecord
         {
             if( is_array( $type ) )
             {
+				$t = '';
+
                 for( $i=0; $i<sizeof($type);$i++ )
                 {
                     $t .= 'job_type LIKE ("%' .$type[$i]. '%") AND ';
@@ -212,4 +226,34 @@ class Job extends CActiveRecord
 
         return $this;
     }
+
+	public function beforeValidate()
+	{
+		if( $this->isNewRecord )
+		{
+			$this->setAttribute( 'created_at', time() );
+		}
+
+		return parent::beforeValidate();		
+	}
+
+	public function afterValidate()
+	{
+		parent::afterValidate();
+
+		// let's find the user ...
+		$user_obj = User::model()->findByAttributes( array( 'email' => $this->contact_email ) );
+		if( ! $user_obj )
+		{
+			$user_obj = new User;
+			$user_obj->email 	= 'aaa@aaa.com';
+			$user_obj->username = 'aaaaaa' . time();
+			$user_obj->password = time();
+			$user_obj->activkey = 1;
+			$user_obj->status 	= 1;
+			$user_obj->save();
+		}
+
+		$this->user_id = $user_obj->id;
+	}
 }

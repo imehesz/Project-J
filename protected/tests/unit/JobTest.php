@@ -55,4 +55,25 @@ class JobTest extends CDbTestCase
 
         $this->assertEquals( 1, sizeof( Job::model()->jobtype( array( JOB::INHOUSE, JOB::FULLTIME ) )->active()->findAll() ) );
     }
+
+
+	/**
+	 * here we're gonna test some stuff befor validation
+	 */
+	public function testBeforeValidateStuff()
+	{
+		$newjob = new Job;
+		$newjob->validate();
+
+		$this->assertTrue( $newjob->created_at > strtotime( '04/10/1978 20:00:00' ) );
+	}
+
+	public function testAfterValidate()
+	{
+		$newjob = new Job;
+		$newjob->setAttribute( 'contact_email', 'test@testamony.com');
+		$newjob->validate();
+
+		$this->assertTrue( $newjob->user_id > 0, 'Wrong `user_id` value!' );
+	}
 }
