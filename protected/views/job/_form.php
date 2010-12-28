@@ -53,7 +53,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'job_type'); ?>
-		<?php echo $form->textField($model,'job_type',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo CHtml::activeCheckBoxList($model,'job_type', $model->available_jobtypes ); ?>
 		<?php echo $form->error($model,'job_type'); ?>
 	</div>
 

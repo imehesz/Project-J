@@ -31,6 +31,15 @@ class Job extends CActiveRecord
     const FREELANCE = 'FL';
     const CONTRACT  = 'CO';
 
+    public $available_jobtypes = array(
+        self::INHOUSE     => 'In-House',
+        self::FULLTIME    => 'Full time',
+        self::PARTTIME    => 'Part time',
+        self::REMOTE      => 'Remote',
+        self::FREELANCE   => 'Freelance',
+        self::CONTRACT    => 'Contract',
+    );
+
 	const PACKAGE1  = 1;
 	const PACKAGE7 	= 7;
 	const PACKAGE14 = 14;
@@ -66,11 +75,11 @@ class Job extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('company, contact_email, position', 'required'),
+			array('company, contact_email, position, job_type', 'required'),
 			array('contact_email', 'email' ),
 			array('user_id, status, confidential, featured, created_at, expires_at', 'numerical', 'integerOnly'=>true),
 			array('company, contact_email, logo', 'length', 'max'=>100),
-			array('company_link, location, job_type', 'length', 'max'=>255),
+			array('company_link, location', 'length', 'max'=>255),
 			array('description', 'length', 'max'=>10000),
 			array('php_type', 'length', 'max'=>20),
 			array('package_type', 'length', 'max'=>5),
@@ -288,9 +297,24 @@ class Job extends CActiveRecord
                                 $this->expires_at = $this->created_at + self::DAY;
             }
 
+
             return true;
         }
 
         return false;
 	}
+
+    /**
+     * we have to take care of some
+     * things before we save ...
+     */
+    public function beforeSave()
+    {
+        if( is_array( $this->job_type ) )
+        {
+            $this->job_type = implode( ';', $this->job_type );
+        }
+
+        return parent::beforeSave();
+    }
 }
