@@ -29,6 +29,7 @@ return array(
 		'php_type' => 'yii',
 		'created_at' => $now,
 		'expires_at' => $now + WEEK,
+		'package_type'	=> 7,
 	),
 	// expires sample(expired yesterday!)
 	'sample2'=>array(
@@ -47,6 +48,7 @@ return array(
 		'php_type' => 'yii',
 		'created_at' => $now,
 		'expires_at' => $now - DAY,
+		'package_type'	=> 1,
 	),
 	// not expired, BUT now active - didn't pay!
 	'sample3'=>array(
@@ -65,6 +67,7 @@ return array(
 		'php_type' => 'yii',
 		'created_at' => $now,
 		'expires_at' => $now + DAY30,
+		'package_type'	=> 30,
 	),
 	'sample4'=>array(
 		'user_id' => '1',
@@ -82,6 +85,7 @@ return array(
 		'php_type' => 'yii',
 		'created_at' => $now,
 		'expires_at' => $now + DAY30,
+		'package_type'	=> 30,
 	),
 
 );
