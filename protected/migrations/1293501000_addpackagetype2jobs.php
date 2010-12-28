@@ -8,7 +8,7 @@ class Addpackagetype2jobs extends Doctrine_Migration_Base
 
     public function up()
     {
-		$this->addColumn($this->name, 'package_type', 'string', 5, array( 'notnull' => 1, 'default' => '7' ) );
+		$this->addColumn($this->name, 'package_type', 'string', 5, array( 'notnull' => 1, 'default' => '1' ) );
     }
 
     public function down()
