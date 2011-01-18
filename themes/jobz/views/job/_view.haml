@@ -1,0 +1,20 @@
+.job-row
+  .job-row-date-column
+    = strtolower( date( 'M', $data->created_at) )
+    .job-row-date-column-date
+      = date( 'd', $data->created_at)
+  .job-row-content-column
+    .job-row-icon-column
+      = CHtml::image( Yii::app()->theme->baseUrl . '/images/icon-default-user.png', null, array( 'title' => 'Posted by ' . $data->company ) )
+      = CHtml::image( Yii::app()->theme->baseUrl . '/images/icon-featured.png', null, array( 'title' => 'Featured Job' ) )
+    %p.job-row-position
+      = CHtml::link( $data->position, $this->createUrl( 'job/view', array( 'id' => $data->id) ) )
+    %p.job-row-company
+      = $data->company . ' <span class="weight-normal italic">in</span> ' . $data->location . '<br />'
+      %span.job-row-job-type
+        :php
+          $types = explode( ';', $data->job_type );
+          if( is_array( $types ) )
+          {
+            for( $i=0; $i<sizeof( $types ); $i++ ) { echo $data->available_jobtypes[$types[$i]] . ' / '; }
+          }

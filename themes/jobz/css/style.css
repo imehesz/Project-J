@@ -1,0 +1,201 @@
+body
+{
+	background: url( ../images/bg.jpg ) #000 top no-repeat !important;
+}
+
+a
+{
+	color: #4e3b26;
+	text-decoration: none;
+}
+
+a:hover
+{
+	color: #4e3b26;
+	text-shadow: 0 0 3px yellow;
+}
+
+h1
+{
+	color: #4e3b26;
+	font-style: italic;
+}
+
+.container
+{
+	background-color: #e9ddbf;
+	background: url( ../images/container-bg.jpg );
+	height: 100%;
+}
+
+.inner-content
+{
+	width: 920px;
+	padding: 0px 20px;
+	margin-top: -30px;
+}
+
+.header-top
+{
+	background: url( ../images/steam-top.jpg ) no-repeat;
+	height: 286px;
+}
+
+.header-bottom
+{
+	background: url( ../images/steam-bottom.png ) no-repeat;
+	height: 113px;
+	padding: 20px 20px 0px 20px;
+}
+
+.footer
+{
+	background: url( ../images/footer.jpg ) no-repeat;
+	height: 102px;
+	color: yellow;
+	text-align: center;
+	padding-top: 20px;
+	font-style: italic;
+	margin-bottom: -20px;
+}
+
+.footer a
+{
+	color: #daa520;
+	text-decoration: none;
+}
+
+.footer a:hover
+{
+	text-shadow: 0 0 1em yellow;
+}
+
+.clear
+{
+	clear: both;
+}
+
+.float-right
+{
+	float: right;
+}
+
+.top-date
+{
+	color: #4e3b26;
+	font-size: 16px;
+	font-style: italic;
+	letter-spacing: 3px;
+	text-align: right;
+}
+
+.job-row
+{
+	background: url( ../images/row.png  ) no-repeat;
+	width: 699px;
+	height: 109px;
+	margin-bottom: 5px;
+	color: #4e3b26;
+	padding: 5px 0px;
+}
+
+.job-row-date-column
+{
+	width: 119px;
+	text-align:center;
+	color: #c9b69a;
+	padding: 35px 0px 0px 5px;
+	font-weight: bolder;
+}
+
+.job-row-date-column-date
+{
+	font-size: 16px;
+}
+
+.job-row-content-column
+{
+	float:right;
+	width: 530px;
+	margin: -63px 45px 0px 0px;
+	padding-right: 5px;
+	height: 87px;
+}
+
+.job-row-icon-column
+{
+	width: 45px;
+	height: 87px;
+	float:left;
+}
+
+.job-row-position
+{
+	width: 485px;
+	font-size: 16px;
+	font-weight: bolder;
+	letter-spacing: 2px;
+	margin-left: 45px;
+	margin-top: 2px;
+	overflow: hidden;
+	height: 35px;
+}
+
+.job-row-job-type
+{
+	font-size: 10px;
+}
+
+.job-row-company
+{
+	font-weight: bolder;
+	margin-left: 45px;
+	margin-top: -10px;
+	height: 35px;
+	line-height: 20px;
+	font-size: 14px;
+}
+
+.weight-normal
+{
+	font-weight: normal;
+}
+
+.italic
+{
+	font-style: italic;
+}
+
+.list-view .summary
+{
+	display: none;
+}
+
+.form label
+{
+	color: #4e3b26;
+	font-size: 26px !important;
+}
+
+#job-form input
+{
+	color: #4e3b26;
+	height: 40px;
+	font-size: 18px;
+	padding: 5px;
+	letter-spacing: 2px;
+}
+
+input[type='checkbox']
+{
+	margin: 2px 2px 2px 2px; border: 0px;
+}
+input.checkbox
+{
+	background-color: #f00;
+}
+
+.note
+{
+	color: #777;
+}

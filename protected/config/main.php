@@ -80,6 +80,15 @@ return array(
 				*/
 			),
 		),
+
+		'viewRenderer'=>array(
+			'class'=>'ext.phamlp.Haml',
+			// delete options below in production
+			'ugly' => false,
+			'style' => 'nested',
+			'debug' => 0,
+			'cache' => false,
+		),
 	),
 
 	'modules'=>array(
@@ -92,4 +101,6 @@ return array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
 	),
+
+	'theme'	=> 'jobz',
 );
