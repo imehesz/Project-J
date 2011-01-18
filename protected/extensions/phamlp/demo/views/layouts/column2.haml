@@ -1,0 +1,21 @@
+-# Haml version of the Yii 2 Column Layout
+-#
+  Please refer to readme for more information
+- $this->beginContent('//layouts/main');
+.container
+  .span-19
+    #content
+      = $content
+  .span-5.last
+    #sidebar
+      :php
+        $this->beginWidget('zii.widgets.CPortlet', array(
+          'title'=>'Operations',
+        ));
+        $this->widget('zii.widgets.CMenu', array(
+          'items'=>$this->menu,
+          'htmlOptions'=>array('class'=>'operations'),
+        ));
+        $this->endWidget();
+    / sidebar
+- $this->endContent();

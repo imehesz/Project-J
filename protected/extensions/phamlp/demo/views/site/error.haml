@@ -1,0 +1,15 @@
+-# Haml version of the Yii Error Page
+-#
+  Please refer to readme for more information
+:php
+  $this->pageTitle=Yii::app()->name . ' - Error';
+  $this->breadcrumbs=array(
+    'Error',
+  );
+
+%h2
+  Error #{$code}
+
+.error
+  = CHtml::encode($message)
+  
