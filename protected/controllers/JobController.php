@@ -127,7 +127,7 @@ class JobController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Job');
+		$dataProvider=new CActiveDataProvider( Job::model()->active());
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
