@@ -3,7 +3,7 @@
 /**
  * we set a default time and we compare everything from it later
  */
-$now = strtotime( '12/25/2010 18:00:00' );
+$now = time();
 
 defined( 'HOUR' ) or define( 'HOUR', 60*60 );
 defined( 'DAY' ) or define( 'DAY', HOUR * 24 );
@@ -14,6 +14,7 @@ defined( 'WEEK2' ) or define( 'WEEK2', DAY * 14 );
 return array(
 	// simple sample, expires in a week
 	'sample1'=>array(
+		'id'	=> 1,			
 		'user_id' => '1',
 		'company' => 'Google',
 		'company_link' => 'http://google.com',
@@ -33,6 +34,7 @@ return array(
 	),
 	// expires sample(expired yesterday!)
 	'sample2'=>array(
+		'id'	=> 2,	
 		'user_id' => '1',
 		'company' => 'Facebook',
 		'company_link' => 'http://facebook.com',
@@ -52,6 +54,7 @@ return array(
 	),
 	// not expired, BUT now active - didn't pay!
 	'sample3'=>array(
+		'id'	=> 3,	
 		'user_id' => '1',
 		'company' => 'HP',
 		'company_link' => 'http://hp.com',
@@ -70,6 +73,7 @@ return array(
 		'package_type'	=> 30,
 	),
 	'sample4'=>array(
+		'id'	=> 4,	
 		'user_id' => '1',
 		'company' => 'Google',
 		'company_link' => 'http://google.com',

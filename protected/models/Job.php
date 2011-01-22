@@ -297,6 +297,10 @@ class Job extends CActiveRecord
                                 $this->expires_at = $this->created_at + self::DAY;
             }
 
+			if( ! Yii::app()->params[ 'php_type' ] )
+			{
+				$this->php_type = 'yii';
+			}
 
             return true;
         }
@@ -304,17 +308,39 @@ class Job extends CActiveRecord
         return false;
 	}
 
-    /**
-     * we have to take care of some
-     * things before we save ...
-     */
-    public function beforeSave()
-    {
-        if( is_array( $this->job_type ) )
-        {
-            $this->job_type = implode( ';', $this->job_type );
-        }
 
-        return parent::beforeSave();
-    }
+	/**
+	 * if everything is fine and OK, we implode the jobtypes
+	 * to be a string and nit an array ...
+	 */
+	public function afterValidate()
+	{
+		parent::afterValidate();
+
+		if( sizeof( $this->errors ) == 0 )
+		{
+			if( is_array( $this->job_type ) )
+			{
+				$this->job_type = implode( ';', $this->job_type );
+			}
+		}
+
+		// TODO implement PayPal stuff!
+		$this->status = 1;
+	}
+
+	/**
+	 * after we find the record, we need to explode the
+	 * job_type string (that store in the DB separated by ;)
+	 * into an array, if this is for a form ...
+	 */
+	public function afterFind()
+	{
+		parent::afterFind();
+
+		if( isset( Yii::app()->controller->action->id ) && Yii::app()->controller->action->id == 'update' )
+		{
+			$this->job_type = explode( ';', $this->job_type );
+		}
+	}
 }

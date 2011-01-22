@@ -64,6 +64,11 @@ class JobTest extends CDbTestCase
 	{
 		$newjob = new Job;
 		$newjob->setAttribute( 'contact_email', 'test@testamony.com');
+		$newjob->setAttribute( 'company_link', 'http://mehesz.net');
+		$newjob->setAttribute( 'logo', 'http://mehesz.net/somelogoimage.jpg');
+		$newjob->setAttribute( 'confidential', '0');
+		$newjob->setAttribute( 'featured', '0');
+		$newjob->setAttribute( 'location', 'somewhere where there are trees');
         $newjob->setAttribute( 'company', 'Mehesz.net' );
         $newjob->setAttribute( 'position', 'Developer' );
         $newjob->setAttribute( 'job_type', array( 'FT', 'IH' ) );
@@ -85,10 +90,15 @@ class JobTest extends CDbTestCase
         $newjob2->setAttribute( 'company', 'Mehesz.net' );
         $newjob2->setAttribute( 'position', 'Developer #2' );
         $newjob2->setAttribute( 'job_type', array( 'FT' ) );
+		$newjob2->setAttribute( 'company_link', 'http://mehesz.net');
+		$newjob2->setAttribute( 'logo', 'http://mehesz.net/somelogoimage.jpg');
+		$newjob2->setAttribute( 'confidential', '0');
+		$newjob2->setAttribute( 'location', 'somewhere where there are trees');
 
         $newjob2->package_type = Job::PACKAGEFEAT;
-        $this->assertTrue( strlen( $newjob2->job_type ) > 0 );
 		$newjob2->validate();
+
+        $this->assertTrue( strlen( $newjob2->job_type ) > 0 );
 
         $this->assertEquals( $newjob2->featured, 1 );
         $this->assertTrue( $newjob2->save() );
