@@ -175,24 +175,33 @@ h1
 {
 	color: #4e3b26;
 	font-size: 26px !important;
+	float: left;
+	width: 200px;
+}
+
+.required
+{
+	float: static;
 }
 
 #job-form input
 {
 	color: #4e3b26;
-	height: 40px;
-	font-size: 18px;
-	padding: 5px;
-	letter-spacing: 2px;
+	height: 30px;
+	font-size: 14px;
+	padding: 3px;
+	letter-spacing: 1px;
 }
 
 input[type='checkbox']
 {
 	margin: 2px 2px 2px 2px; border: 0px;
+	vertical-align: middle;
 }
-input.checkbox
+
+input[type='textarea']
 {
-	background-color: #f00;
+	float: static;
 }
 
 .note

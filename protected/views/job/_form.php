@@ -34,12 +34,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'confidential'); ?>
-		<?php echo $form->textField($model,'confidential'); ?>
-		<?php echo $form->error($model,'confidential'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'location'); ?>
 		<?php echo $form->textField($model,'location',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'location'); ?>
@@ -52,10 +46,21 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'job_type'); ?>
+		<?php echo $form->labelEx($model,'confidential'); ?>
+		<?php echo $form->checkBox($model,'confidential'); ?>
+		<?php echo $form->error($model,'confidential'); ?>
+		<div class="hint">
+			If you select the <b>Confidential</b> checkbox, your company's name and email address <br />will be <b>hidden from the public</b> and candidates will only be able to contact you <br />through our contact form!
+		</div>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'job_type'); ?><div class="clear"><br /></div>
 		<?php echo CHtml::activeCheckBoxList($model,'job_type', $model->available_jobtypes ); ?>
 		<?php echo $form->error($model,'job_type'); ?>
 	</div>
+
+	<hr />
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
@@ -64,6 +69,7 @@
 	</div>
 
 	<div class="row buttons">
+		<a href="#">Cancel</a>
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 

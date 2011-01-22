@@ -6,7 +6,7 @@
   .job-row-content-column
     .job-row-icon-column
       = CHtml::image( Yii::app()->theme->baseUrl . '/images/icon-default-user.png', null, array( 'title' => 'Posted by ' . $data->company ) )
-      = CHtml::image( Yii::app()->theme->baseUrl . '/images/icon-featured.png', null, array( 'title' => 'Featured Job' ) )
+      = $data->featured ? CHtml::image( Yii::app()->theme->baseUrl . '/images/icon-featured.png', null, array( 'title' => 'Featured Job' ) ) : ''
     %p.job-row-position
       = CHtml::link( $data->position, $this->createUrl( 'job/view', array( 'id' => $data->id) ) )
     %p.job-row-company
