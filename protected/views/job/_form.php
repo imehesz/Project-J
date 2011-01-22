@@ -64,7 +64,21 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
+
+		<?php $this->widget('application.extensions.fckeditor.FCKEditorWidget',array(
+							"model"=>$model,                # Data-Model
+							"attribute"=>'description',         # Attribute in the Data-Model
+							"height"=>'400px',
+							"width"=>'600px',
+							"toolbarSet"=>'Basic',          # EXISTING(!) Toolbar (see: fckeditor.js)
+							"fckeditor"=>Yii::app()->basePath."/../fckeditor/fckeditor.php",
+# Path to fckeditor.php
+							"fckBasePath"=>Yii::app()->baseUrl."/fckeditor/",
+# Realtive Path to the Editor (from Web-Root)
+							"config" => array("EditorAreaCSS"=>Yii::app()->baseUrl.'/css/index.css',),
+# Additional Parameter (Can't configure a Toolbar dynamicly)
+							) ); ?>
+		
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 
