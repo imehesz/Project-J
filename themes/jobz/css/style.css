@@ -23,8 +23,8 @@ h1
 
 .container
 {
-	background-color: #e9ddbf;
-	background: url( ../images/container-bg.jpg );
+	background: url( ../images/container-bg.jpg ) no-repeat #e9ddbf;
+	background-position: 0px 285px;
 	height: 100%;
 }
 
@@ -132,13 +132,13 @@ h1
 .job-row-position
 {
 	width: 485px;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: bolder;
 	letter-spacing: 2px;
 	margin-left: 45px;
 	margin-top: 2px;
 	overflow: hidden;
-	height: 35px;
+	height: 42px;
 }
 
 .job-row-job-type
@@ -150,7 +150,7 @@ h1
 {
 	font-weight: bolder;
 	margin-left: 45px;
-	margin-top: -10px;
+	margin-top: -20px;
 	height: 35px;
 	line-height: 20px;
 	font-size: 14px;
