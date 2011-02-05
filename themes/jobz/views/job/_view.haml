@@ -1,11 +1,17 @@
 .job-row
   .job-row-date-column
-    = strtolower( date( 'M', $data->created_at) )
+    :php
+      $smart_difference = $data->expires_at - time();
+      $smart_time = round($smart_difference/Job::DAY);
+      $smart_caption = $smart_time == 1 ?  '1 day' : $smart_time . ' days';
+
+    = '<span title="Expires in ' . $smart_caption . '">' . strtolower( date( 'M', $data->created_at) )
     .job-row-date-column-date
-      = date( 'd', $data->created_at)
+      = date( 'd', $data->created_at) . '</span>'
   .job-row-content-column
     .job-row-icon-column
-      = CHtml::image( Yii::app()->theme->baseUrl . '/images/icon-default-user.png', null, array( 'title' => 'Posted by ' . $data->company ) )
+      - $thumb_path = YiiBase::getPathOfAlias( 'webroot.images.uploads.logos' ) . '/' .$data->logo
+      = $data->logo ? CHtml::image( str_ireplace('index.php/','',Yii::app()->image->createUrl('thumb', $thumb_path )), null, array( 'title' => 'Posted by ' . $data->company ) ) : CHtml::image( Yii::app()->theme->baseUrl . '/images/icon-default-user.png', null, array( 'title' => 'Posted by ' . $data->company ) )
       = $data->featured ? CHtml::image( Yii::app()->theme->baseUrl . '/images/icon-featured.png', null, array( 'title' => 'Featured Job' ) ) : ''
     %p.job-row-position
       = CHtml::link( $data->position, $this->createUrl( 'job/view', array( 'id' => $data->id) ) )
@@ -16,5 +22,6 @@
           $types = explode( ';', $data->job_type );
           if( is_array( $types ) )
           {
+            echo '/ ';
             for( $i=0; $i<sizeof( $types ); $i++ ) { echo $data->available_jobtypes[$types[$i]] . ' / '; }
           }
