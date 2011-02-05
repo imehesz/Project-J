@@ -24,6 +24,11 @@
  */
 class Job extends CActiveRecord
 {
+	/**
+	 * variable for the uploaded logo image
+	 */
+	public	$image;
+
     const INHOUSE   = 'IH';
     const FULLTIME  = 'FT';
     const PARTTIME  = 'PT';
@@ -83,6 +88,7 @@ class Job extends CActiveRecord
 			array('description', 'length', 'max'=>10000),
 			array('php_type', 'length', 'max'=>20),
 			array('package_type', 'length', 'max'=>5),
+			array('image', 'file', 'types' => 'jpg, gif, png', 'allowEmpty' => true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, user_id, company, company_link, contact_email, status, logo, confidential, featured, location, job_type, php_type, created_at, expires_at, description', 'safe', 'on'=>'search'),

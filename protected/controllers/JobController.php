@@ -27,7 +27,7 @@ class JobController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'create'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -69,8 +69,23 @@ class JobController extends Controller
 		if(isset($_POST['Job']))
 		{
 			$model->attributes=$_POST['Job'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if( $model->validate() )
+			{
+				$model->image 	= CUploadedFile::getInstance( $model, 'image' );
+				if( isset( $model->image ) )
+				{
+					$file_name = MUtility::strToPretty( $model->image->name ) . time() . '.' . $model->image->extensionName;
+					// $file	= dirname(Yii::app()->request->scriptFile) . DIRECTORY_SEPARATOR . 'uploads/logos' . DIRECTORY_SEPARATOR . $model->image->name;
+					$file	= dirname(Yii::app()->request->scriptFile) . '/images/uploads/logos/' . $file_name;
+					$model->image->saveAs( $file );
+					$model->logo = $file_name;
+				}
+
+				if($model->save())
+				{
+					$this->redirect(array('view','id'=>$model->id));
+				}
+			}
 		}
 
 		$this->render('create',array(

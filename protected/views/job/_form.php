@@ -3,6 +3,7 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'job-form',
 	'enableAjaxValidation'=>false,
+	'htmlOptions' => array( 'enctype'	=> 'multipart/form-data' ),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -28,8 +29,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'logo'); ?>
-		<?php echo $form->textField($model,'logo',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->labelEx($model,'image'); ?>
+		<?php echo $form->fileField( $model,'image' ); ?>
 		<?php echo $form->error($model,'logo'); ?>
 	</div>
 
