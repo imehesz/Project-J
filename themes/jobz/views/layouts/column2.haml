@@ -4,8 +4,8 @@
 - $this->beginContent('//layouts/main');
   .span-5.last
     #sidebar
-      blaaaaaah
       :php
+        /*
         $this->beginWidget('zii.widgets.CPortlet', array(
           'title'=>'Operations',
         ));
@@ -14,6 +14,19 @@
           'htmlOptions'=>array('class'=>'operations'),
         ));
         $this->endWidget();
+        */
+      .box-search
+        = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-search.png' )
+      .box-jobpost
+        = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-jobpost.png' )
+        %p
+          If you are specifically looking for a <b>Yii</b> (PHP) framework developer, this is probably the best place to start.
+        %p
+          = CHtml::link( 'Post a job >', $this->createUrl( 'job/create' ))
+      .box-contact
+        = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-contact.png' )
+      .box-tweets
+        = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-tweets.png' )
     / sidebar
   .span-18
     #content
