@@ -1,7 +1,7 @@
 <?php
 
 // change the following paths if necessary
-$yii=dirname(__FILE__).'/../../yii-1.1.5.r2654/framework/yii.php';
+$yii=dirname(__FILE__).'/../../yii-1.1.6/framework/yii.php';
 
 defined( 'ENV' ) or define( 'ENV', 'development' );
 
