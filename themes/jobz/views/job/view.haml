@@ -1,0 +1,29 @@
+.inner-inner
+  %h1.position
+    = $model->position
+  - $thumb_path = YiiBase::getPathOfAlias( 'webroot.images.uploads.logos' ) . '/' . $model->logo
+  .big-logo
+    = $model->logo ? CHtml::image( str_ireplace( 'index.php/', '', Yii::app()->image->createUrl( 'biglogo', $thumb_path ) ), null, array( 'title' => $model->company ) ) : ''
+  .clear
+  .job-info
+    .info-label
+      Company: 
+    = $model->company
+    .clear
+
+    .info-label
+      Location:
+    = $model->location
+    .clear
+
+    .info-label
+      Job Type:
+    :php
+      $types = explode( ';', $model->job_type ) ;
+      if( is_array( $types ) )
+      {
+        for( $i=0; $i<sizeof($types); $i++ ){ echo $model->available_jobtypes[$types[$i]] . ' '; }
+      }
+    .clear
+  .job-description
+    = $model->description

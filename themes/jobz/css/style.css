@@ -21,6 +21,16 @@ h1
 	font-style: italic;
 }
 
+h1.position
+{
+	font-style: normal;
+	width: 375px;
+	float:left;
+	font-size: 26px;
+	font-weight: bolder;
+	padding-left:85px;
+}
+
 .container
 {
 	background: url( ../images/container-bg.jpg ) no-repeat #e9ddbf;
@@ -219,4 +229,44 @@ input[type='textarea']
 .box-jobpost a
 {
 	font-weight: bolder;
+}
+
+.postbutton
+{
+	width: 100px;
+	padding: 10px;
+	font-size: 16px;
+	color: #e8ddbf;
+	background-color: #4e3b26;
+}
+
+.big-logo
+{
+	float:right;
+}
+
+.info-label
+{
+	float:left;
+	width: 100px;
+	font-weight: bolder;
+}
+
+.job-info
+{
+	line-height: 25px;
+	font-size: 16px;
+	margin-left: 100px;
+}
+
+.job-description
+{
+	padding: 10px;
+}
+
+.inner-inner
+{
+	background: url( ../images/inner-pages-bg.png ) no-repeat;
+	padding: 10px 0px 0px 10px;
+	font-size: 14px;
 }

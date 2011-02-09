@@ -21,8 +21,8 @@
         = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-jobpost.png' )
         %p
           If you are specifically looking for a <b>Yii</b> (PHP) framework developer, this is probably the best place to start.
-        %p
-          = CHtml::link( 'Post a job >', $this->createUrl( 'job/create' ))
+          .postbutton
+            = CHtml::link( 'Post a job', $this->createUrl( 'job/create' ), array( 'class' => 'postbutton' ))
       .box-contact
         = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-contact.png' )
       .box-tweets
