@@ -119,6 +119,7 @@ class Job extends CActiveRecord
 			'contact_email' => 'Contact Email',
 			'status' => 'Status',
 			'logo' => 'Logo',
+			'image' => 'Your Logo',
 			'confidential' => 'Confidential',
 			'featured' => 'Featured',
 			'location' => 'Location',

@@ -32,6 +32,7 @@
 		<?php echo $form->labelEx($model,'image'); ?>
 		<?php echo $form->fileField( $model,'image' ); ?>
 		<?php echo $form->error($model,'logo'); ?>
+		<p class="hint">Plase note that your logo <b>will be resized, cut, destorted</b> to harmonize <br />with our cool design.</p>
 	</div>
 
 	<div class="row">
@@ -46,6 +47,7 @@
 		<?php echo $form->error($model,'position'); ?>
 	</div>
 
+	<?php /*
 	<div class="row">
 		<?php echo $form->labelEx($model,'confidential'); ?>
 		<?php echo $form->checkBox($model,'confidential'); ?>
@@ -53,7 +55,7 @@
 		<div class="hint">
 			If you select the <b>Confidential</b> checkbox, your company's name and email address <br />will be <b>hidden from the public</b> and candidates will only be able to contact you <br />through our contact form!
 		</div>
-	</div>
+	</div> */ ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'job_type'); ?><div class="clear"><br /></div>
