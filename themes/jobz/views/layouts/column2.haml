@@ -17,6 +17,27 @@
         */
       .box-search
         = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-search.png' )
+        :php
+          if( Yii::app()->controller->id == 'job' && Yii::app()->controller->action->id == 'index' )
+          {
+          Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/helper.js');
+          $something = <<<SOME
+          <form class="search-form" title="Click to filter through jobs">
+            <input type="checkbox" id="ft" onClick="updateJobs(this);"> <label for="ft"><span class="search-form">Full Time</span></label><br />
+            <input type="checkbox" id="pt" onClick="updateJobs(this);"> <label for="pt">Part Time</label><br />
+            <input type="checkbox" id="ih" onClick="updateJobs(this);"> <label for="ih">In-House</label><br />
+            <input type="checkbox" id="rm" onClick="updateJobs(this);"> <label for="rm">Remote</label><br />
+            <input type="checkbox" id="fl" onClick="updateJobs(this);"> <label for="fl">Freelance</label><br />
+            <input type="checkbox" id="co" onClick="updateJobs(this);"> <label for="co">Contract</label><br />
+          </form>
+          SOME;
+            echo $something;
+          }
+          else
+          {
+            echo '<p>' . CHtml::link( 'Click here', $this->createUrl( 'job/index' ) ) . ' to search for a job that will change your life forever.</p>';
+          }
+        %p
       .box-jobpost
         = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-jobpost.png' )
         %p
