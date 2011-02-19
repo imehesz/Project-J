@@ -27,3 +27,7 @@
     .clear
   .job-description
     = $model->description
+  .job-apply
+    .job-apply-text
+      If you think you are qualified for this job, please contact them at:
+    = CHtml::mailto( $model->contact_email, $model->contact_email )

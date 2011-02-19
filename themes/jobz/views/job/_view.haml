@@ -5,6 +5,18 @@
       $smart_time = round($smart_difference/Job::DAY);
       $smart_caption = $smart_time == 1 ?  '1 day' : $smart_time . ' days';
 
+      switch( $smart_time )
+      {
+        case 0:
+          $smart_caption = 'less than a day';
+          break;
+        case 1: 
+          $smart_caption = '1 day';
+          break;
+        default:
+          $smart_caption = $smart_time . ' days';
+      }
+
     = '<span title="Expires in ' . $smart_caption . '">' . strtolower( date( 'M', $data->created_at) )
     .job-row-date-column-date
       = date( 'd', $data->created_at) . '</span>'
@@ -22,6 +34,5 @@
           $types = explode( ';', $data->job_type );
           if( is_array( $types ) )
           {
-            echo '/ ';
-            for( $i=0; $i<sizeof( $types ); $i++ ) { echo $data->available_jobtypes[$types[$i]] . ' / '; }
+            for( $i=0; $i<sizeof( $types ); $i++ ) { echo $data->available_jobtypes[$types[$i]] . ' '; }
           }

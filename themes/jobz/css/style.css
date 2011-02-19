@@ -272,8 +272,24 @@ input[type='textarea']
 .search-form label
 {
 	color: #4e3b26;
-	font-size: 28px;
+	font-size: 14px;
 	line-height: 24px;
-	letter-spacing: 3px;
+	letter-spacing: 2px;
 	font-weight: normal;
+}
+
+.job-apply
+{
+	border: 2px solid #4e3b26;
+	padding:10px;
+	text-align: center;
+	font-size: 16px;
+	font-style: italic;
+}
+
+.job-apply a
+{
+	font-size: 18px;
+	font-style: normal;
+	letter-spacing: 3px;
 }

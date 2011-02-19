@@ -19,6 +19,8 @@
       Yii::app()->clientScript->registerScriptFile( Yii::app()->theme->baseUrl . '/js/fonts/cufon-yui.js' );
       Yii::app()->clientScript->registerScriptFile( Yii::app()->theme->baseUrl . '/js/fonts/Windsong_400.font.js' );
   %body
+    :php
+      Yii::app()->clientScript->registerScript('datefontscript', 'Cufon.replace(".top-date")',CClientScript::POS_END );
     .container
       .header-top
       / header-top
@@ -36,6 +38,3 @@
         = CHtml::link( 'mehesz<span style="color:red;">.</span>net', 'http://mehesz.net' );
       / footer
     / container
-    :php
-      Yii::app()->clientScript->registerScript('datefontscript', 'Cufon.replace(".top-date")',CClientScript::POS_END );
-      Yii::app()->clientScript->registerScript('searchfontscript', 'Cufon.replace(".search-form")',CClientScript::POS_END );

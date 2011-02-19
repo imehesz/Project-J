@@ -38,8 +38,8 @@ class Job extends CActiveRecord
 
     public $available_jobtypes = array(
         self::INHOUSE     => 'In-House',
-        self::FULLTIME    => 'Full time',
-        self::PARTTIME    => 'Part time',
+        self::FULLTIME    => 'Full-time',
+        self::PARTTIME    => 'Part-time',
         self::REMOTE      => 'Remote',
         self::FREELANCE   => 'Freelance',
         self::CONTRACT    => 'Contract',
@@ -225,7 +225,10 @@ class Job extends CActiveRecord
 
                 for( $i=0; $i<sizeof($type);$i++ )
                 {
-                    $t .= 'job_type LIKE ("%' .$type[$i]. '%") AND ';
+					if( isset( $type[$i] ) )
+					{
+                    	$t .= 'job_type LIKE ("%' .$type[$i]. '%") AND ';
+					}
                 }
 
                 $this->getDbCriteria()->mergeWith(
@@ -283,16 +286,18 @@ class Job extends CActiveRecord
 
             $this->user_id = $user_obj->id;
 
+            $expires_at = $this->created_at + self::WEEK;
+
             switch( $this->package_type )
             {
                 case self::PACKAGE7:
-                                $this->expires_at = $this->created_at + self::WEEK;
+                                $expires_at = $this->created_at + self::WEEK;
                                 break;
                 case self::PACKAGE14:
-                                $this->expires_at = $this->created_at + ( self::WEEK * 2 );
+                                $expires_at = $this->created_at + ( self::WEEK * 2 );
                                 break;
                 case self::PACKAGE30:
-                                $this->expires_at = $this->created_at + self::DAY30;
+                                $expires_at = $this->created_at + self::DAY30;
                                 break;
                 case self::PACKAGEFEAT:
                                 // TODO send an email to me so we can announce the JOB in 
@@ -300,9 +305,17 @@ class Job extends CActiveRecord
                                 $this->expires_at = $this->created_at + self::DAY30;
                                 $this->featured   = 1;
                                 break;
-                default:
-                                $this->expires_at = $this->created_at + self::DAY;
             }
+
+			// here is the fun part, if the user is logged in 
+			// and administrator!, we overwrite the expired date
+			// TODO do the actual admin part ...
+			if( ! Yii::app()->user->isGuest )
+			{
+				$expires_at = strtotime( $this->expires_at );
+			}
+
+			$this->expires_at = $expires_at;
 
 			if( ! Yii::app()->params[ 'php_type' ] )
 			{

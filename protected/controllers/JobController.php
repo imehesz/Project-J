@@ -142,9 +142,42 @@ class JobController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider( Job::model()->active());
+		if( !isset( $_SESSION ) )
+		{
+			session_start();
+		}
+
+		if( isset( $_GET['addfilter'] ) || isset( $_GET['removefilter'] ) )
+		{
+			if( isset( $_GET['addfilter'] ) )
+			{
+				$_SESSION['filter'][] = $_GET['addfilter'];
+			}
+			else
+			{
+				$key = array_search( $_GET['removefilter'], $_SESSION['filter'] );
+				if( $key !== false )
+				{
+					unset( $_SESSION['filter'][$key] );
+				}
+			}
+
+			sort( $_SESSION['filter'] );
+			$jobs = Job::model()->jobtype( $_SESSION['filter']  )->active()->findAll();
+		}
+		else
+		{
+			// if we came without any of these parameters, just flush the session
+			unset( $_SESSION['filter'] );
+		}
+
+		if( ! isset( $jobs ) )
+		{
+			$jobs = Job::model()->active()->findAll();
+		}
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'jobs'=>$jobs,
 		));
 	}
 

@@ -15,23 +15,81 @@
         ));
         $this->endWidget();
         */
+        echo '<a name="searchanchor"></a>';
+      :php
+        if( ! Yii::app()->user->isGuest ):
+      %h3
+        Admin Menu
+      %ul
+        %li
+          = CHtml::link( 'Admin Jobs', $this->createUrl( 'job/admin' ) )
+        %li
+          = CHtml::link( 'Create Job', $this->createUrl( 'job/create' ) )
+        %li
+          = CHtml::link( 'Logout', $this->createUrl( 'site/logout' ) )
+      :php
+        endif;
       .box-search
         = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-search.png' )
         :php
           if( Yii::app()->controller->id == 'job' && Yii::app()->controller->action->id == 'index' )
           {
-          Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/helper.js');
-          $something = <<<SOME
-          <form class="search-form" title="Click to filter through jobs">
-            <input type="checkbox" id="ft" onClick="updateJobs(this);"> <label for="ft"><span class="search-form">Full Time</span></label><br />
-            <input type="checkbox" id="pt" onClick="updateJobs(this);"> <label for="pt">Part Time</label><br />
-            <input type="checkbox" id="ih" onClick="updateJobs(this);"> <label for="ih">In-House</label><br />
-            <input type="checkbox" id="rm" onClick="updateJobs(this);"> <label for="rm">Remote</label><br />
-            <input type="checkbox" id="fl" onClick="updateJobs(this);"> <label for="fl">Freelance</label><br />
-            <input type="checkbox" id="co" onClick="updateJobs(this);"> <label for="co">Contract</label><br />
-          </form>
-          SOME;
-            echo $something;
+          // Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/helper.js');
+          if( isset( $_SESSION['filter'] ) )
+          {
+            Yii::app()->clientScript->registerScript('scrollscript', 'location.href="#searchanchor"' );
+          }
+          $fulltime_checked = $parttime_checked = $inhouse_checked = $remote_checked = $contract_checked = $freelance_checked = '/images/checkbox-unchecked.jpg'; 
+          // first off, let's check if there is anything in the SESSIONS array
+          // TODO refactor this, AJAX and stuff NOOOOW
+          $fulltime_link = $this->createUrl( 'job/index', array( 'addfilter' => Job::FULLTIME ) );
+          $parttime_link = $this->createUrl( 'job/index', array( 'addfilter' => Job::PARTTIME ) );
+          $inhouse_link = $this->createUrl( 'job/index', array( 'addfilter' => Job::INHOUSE ) );
+          $remote_link = $this->createUrl( 'job/index', array( 'addfilter' => Job::REMOTE ) );
+          $contract_link = $this->createUrl( 'job/index', array( 'addfilter' => Job::CONTRACT ) );
+          $freelance_link = $this->createUrl( 'job/index', array( 'addfilter' => Job::FREELANCE ) );
+
+          if( isset( $_SESSION['filter'] ) )
+          {
+            if( in_array( Job::FULLTIME, $_SESSION['filter'] ) )
+            { 
+              $fulltime_checked = '/images/checkbox-checked.jpg'; 
+              $fulltime_link = $this->createUrl( 'job/index', array( 'removefilter' => Job::FULLTIME ) ); 
+            }
+            if( in_array( Job::PARTTIME, $_SESSION['filter'] ) )
+            { 
+              $parttime_checked = '/images/checkbox-checked.jpg'; 
+              $parttime_link = $this->createUrl( 'job/index', array( 'removefilter' => Job::PARTTIME ) ); 
+            }
+            if( in_array( Job::INHOUSE, $_SESSION['filter'] ) )
+            {
+              $inhouse_checked = '/images/checkbox-checked.jpg'; 
+              $inhouse_link = $this->createUrl( 'job/index', array( 'removefilter' => Job::INHOUSE ) ); 
+            }
+            if( in_array( Job::REMOTE, $_SESSION['filter'] ) )
+            { 
+              $remote_checked = '/images/checkbox-checked.jpg'; 
+              $remote_link = $this->createUrl( 'job/index', array( 'removefilter' => Job::REMOTE ) ); 
+            }
+            if( in_array( Job::CONTRACT, $_SESSION['filter'] ) )
+            { 
+              $contract_checked = '/images/checkbox-checked.jpg'; 
+              $contract_link = $this->createUrl( 'job/index', array( 'removefilter' => Job::CONTRACT ) ); 
+            }
+            if( in_array( Job::FREELANCE, $_SESSION['filter'] ) )
+            { 
+              $freelance_checked = '/images/checkbox-checked.jpg'; 
+              $freelance_link = $this->createUrl( 'job/index', array( 'removefilter' => Job::FREELANCE ) ); 
+            }
+          }
+
+          $something = '<div>' . CHtml::link( CHtml::image( Yii::app()->theme->baseUrl . $fulltime_checked ) . ' Full Time', $fulltime_link ) .  '</div>';
+          $something .= '<div>' . CHtml::link( CHtml::image( Yii::app()->theme->baseUrl . $parttime_checked ) . ' Part Time', $parttime_link ) .  '</div>';
+          $something .= '<div>' . CHtml::link( CHtml::image( Yii::app()->theme->baseUrl . $inhouse_checked ) . ' In-House', $inhouse_link ) .  '</div>';
+          $something .= '<div>' . CHtml::link( CHtml::image( Yii::app()->theme->baseUrl . $remote_checked ) . ' Remote', $remote_link ) .  '</div>';
+          $something .= '<div>' . CHtml::link( CHtml::image( Yii::app()->theme->baseUrl . $contract_checked ) . ' Contract', $contract_link ) .  '</div>';
+          $something .= '<div>' . CHtml::link( CHtml::image( Yii::app()->theme->baseUrl . $freelance_checked ) . ' Freelance', $freelance_link ) .  '</div>';
+          echo $something;
           }
           else
           {

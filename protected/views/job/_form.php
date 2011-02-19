@@ -85,8 +85,41 @@
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 
+	<?php if( ! Yii::app()->user->isGuest ) : ?>
+		<hr>
+		<fieldset style="border:1px solid red;">
+		<legend>Admin Section</legend>
+		<div class="row">
+			<?php echo $form->labelEx($model,'expires_at'); ?>
+			<?php 
+			$this->widget(
+							'zii.widgets.jui.CJuiDatePicker', 
+							array(
+									'name'=>'Job[expires_at]', 
+									'htmlOptions' => array( 
+											'size' => 10, 
+											),
+									'value' => ($model->isNewRecord ? date( 'm/d/Y', time() ) : date( 'm/d/Y', $model->expires_at ) ) 
+								 )
+						 ); 
+			?>
+			<?php echo $form->error($model,'expires_at'); ?>
+		</div>
+		<div class="row">
+			<?php echo $form->labelEx($model,'status'); ?>
+			<?php echo CHtml::activeDropDownList($model,'status', array( 'In-Active', 'Active' ) ); ?>
+			<?php echo $form->error($model,'status'); ?>
+		</div>
+		<div class="row">
+			<?php echo $form->labelEx($model,'featured'); ?>
+			<?php echo CHtml::activeCheckBox($model,'featured' ); ?>
+			<?php echo $form->error($model,'featured'); ?>
+			<div class="hint">If checked, the job will show up on the top of the lists</div>
+		</div>
+		</fieldset>
+	<?php endif; ?>
+
 	<div class="row buttons">
-		<a href="#">Cancel</a>
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 
