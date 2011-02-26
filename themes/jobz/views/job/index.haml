@@ -2,3 +2,7 @@
   foreach( $jobs as $job  ):
     $this->renderPartial( '_view', array( 'data' => $job ) );
   endforeach;
+  if( sizeof( $jobs ) == 0 )
+  {
+    echo 'Oops, seems like there are no jobs ...';
+  }

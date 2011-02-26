@@ -27,7 +27,8 @@ class Job extends CActiveRecord
 	/**
 	 * variable for the uploaded logo image
 	 */
-	public	$image;
+    public $image;
+    public $verifyCode;
 
     const INHOUSE   = 'IH';
     const FULLTIME  = 'FT';
@@ -89,6 +90,7 @@ class Job extends CActiveRecord
 			array('php_type', 'length', 'max'=>20),
 			array('package_type', 'length', 'max'=>5),
 			array('image', 'file', 'types' => 'jpg, gif, png', 'allowEmpty' => true),
+			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements() ),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, user_id, company, company_link, contact_email, status, logo, confidential, featured, location, job_type, php_type, created_at, expires_at, description', 'safe', 'on'=>'search'),
@@ -127,6 +129,7 @@ class Job extends CActiveRecord
 			'php_type' => 'Php Type',
 			'created_at' => 'Created At',
 			'expires_at' => 'Expires At',
+            'verifyCode'    => 'Human Verification',
 		);
 	}
 
@@ -256,6 +259,11 @@ class Job extends CActiveRecord
      */
 	public function beforeValidate()
 	{
+        // TODO make this better
+        if( ! $this->confidential ) $this->confidential = 0;
+        if( ! $this->featured ) $this->featured = 0;
+        if( ! $this->logo ) $this->logo = '';
+
         if( parent::beforeValidate() )
         {
             if( $this->isNewRecord )
@@ -286,25 +294,30 @@ class Job extends CActiveRecord
 
             $this->user_id = $user_obj->id;
 
-            $expires_at = $this->created_at + self::WEEK;
-
-            switch( $this->package_type )
+            if( $this->isNewRecord )
             {
-                case self::PACKAGE7:
-                                $expires_at = $this->created_at + self::WEEK;
-                                break;
-                case self::PACKAGE14:
-                                $expires_at = $this->created_at + ( self::WEEK * 2 );
-                                break;
-                case self::PACKAGE30:
-                                $expires_at = $this->created_at + self::DAY30;
-                                break;
-                case self::PACKAGEFEAT:
-                                // TODO send an email to me so we can announce the JOB in 
-                                // the podcast
-                                $this->expires_at = $this->created_at + self::DAY30;
-                                $this->featured   = 1;
-                                break;
+                $expires_at = $this->created_at + self::WEEK;
+
+                /*
+                switch( $this->package_type )
+                {
+                    case self::PACKAGE7:
+                                    $expires_at = $this->created_at + self::WEEK;
+                                    break;
+                    case self::PACKAGE14:
+                                    $expires_at = $this->created_at + ( self::WEEK * 2 );
+                                    break;
+                    case self::PACKAGE30:
+                                    $expires_at = $this->created_at + self::DAY30;
+                                    break;
+                    case self::PACKAGEFEAT:
+                                    // TODO send an email to me so we can announce the JOB in 
+                                    // the podcast
+                                    $this->expires_at = $this->created_at + self::DAY30;
+                                    $this->featured   = 1;
+                                    break;
+                }
+                */
             }
 
 			// here is the fun part, if the user is logged in 
@@ -321,10 +334,8 @@ class Job extends CActiveRecord
 			{
 				$this->php_type = 'yii';
 			}
-
             return true;
         }
-
         return false;
 	}
 
