@@ -1,41 +1,51 @@
 -# Haml version of the Yii Contact Page
 -#
   Please refer to readme for more information
-- $this->pageTitle=Yii::app()->name . ' - Contact Us'
-- $this->breadcrumbs=array('Contact')
-%h1 Contact Us
-- if(Yii::app()->user->hasFlash('contact'))
-  .flash-success
-    = Yii::app()->user->getFlash('contact');
-- else
-%p
-  If you have business inquiries or other questions, please fill out the
-  following form to contact us. Thank you.
-.form
-  - $form=$this->beginWidget('CActiveForm')
-  %p.note Fields with <span class='required'>*</span> are required
-  = CHtml::errorSummary($model)
-  .row
-    = $form->labelEx($model,'name')
-    = $form->textField($model,'name')
-  .row
-    = $form->labelEx($model,'email')
-    = $form->textField($model,'email')
-  .row
-    = $form->labelEx($model,'subject')
-    = $form->textField($model,'subject',array('size'=>60,'maxlength'=>128))
-  .row
-    = $form->labelEx($model,'body')
-    = $form->textArea($model,'body',array('rows'=>6, 'cols'=>50))
-  - if(extension_loaded('gd'))
-    .row
-      = $form->labelEx($model,'verifyCode')
-      %div
-        - $this->widget('CCaptcha')
-        = $form->textField($model,'verifyCode')
-      .hint Please enter the letters as they are shown in the image above.
-        %br
-        Letters are not case-sensitive.
-  .row.buttons
-    = CHtml::submitButton('Submit')
-  - $this->endWidget()
+.inner-inner
+  - $this->pageTitle=Yii::app()->name . ' - Contact Us'
+  - $this->breadcrumbs=array('Contact')
+  %h1.position Contact Us
+  - if(Yii::app()->user->hasFlash('contact'))
+    .flash-success
+      = Yii::app()->user->getFlash('contact');
+  - else
+  .clear
+  %p.inner-left-p
+    If you would like to contact us about our <b>featured job</b> option please put "<i>Featured Job</i>" in the subject line to make sure we get back to you with the details right away.<br /><br />If you just wanna tell us how cool we are, that's OK too :)<br /><br />Thank you!
+  .form
+    - $form=$this->beginWidget('CActiveForm')
+    %p.note Fields with <span class='required'>*</span> are required
+    = CHtml::errorSummary($model)
+    %p
+      .row
+        = $form->labelEx($model,'name')
+        = $form->textField($model,'name', array( 'size' => 60 ) )
+    %p
+      .row
+        = $form->labelEx($model,'email')
+        = $form->textField($model,'email', array( 'size' => 60 ) )
+
+    %p
+      .row
+        = $form->labelEx($model,'subject')
+        = $form->textField($model,'subject',array('size'=>60,'maxlength'=>128))
+
+    %p    
+      .row
+        = $form->labelEx($model,'body')
+        %p
+          = $form->textArea($model,'body',array('rows'=>6, 'cols'=>50))
+
+    %p
+      - if(extension_loaded('gd'))
+        .row
+          = $form->labelEx($model,'verifyCode')
+          %div
+            - $this->widget('CCaptcha')
+            = $form->textField($model,'verifyCode')
+          .hint Please enter the letters as they are shown in the image above.
+            %br
+            Letters are not case-sensitive.
+      .row.buttons
+        = CHtml::submitButton('Submit')
+      - $this->endWidget()
