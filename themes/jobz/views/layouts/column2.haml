@@ -101,11 +101,18 @@
         %p
           If you are specifically looking for a <b>Yii</b> (PHP) framework developer, this is probably the best place to start.
           .postbutton
-            = CHtml::link( 'Post a job', $this->createUrl( 'job/create' ), array( 'class' => 'postbutton' ))
+            = CHtml::link( 'Post a job', $this->createUrl( 'job/wanted' ), array( 'class' => 'postbutton' ))
       .box-contact
         = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-contact.png' )
+        .box-jobpost
+          %p
+            If you would like to <b>feature your position</b> or just want to tell us how cool we are, 
+            = CHtml::link( 'Contact us', $this->createUrl( 'site/contact' ) );
       .box-tweets
         = CHtml::image( Yii::app()->theme->baseUrl. '/images/text-tweets.png' )
+        %p
+        .postbutton
+          = CHtml::link( 'Follow us', 'http://twitter.com/yiijobz', array( 'class' => 'postbutton', 'target' => '_blank' ))
         #dwitter_user
     / sidebar
   .span-18

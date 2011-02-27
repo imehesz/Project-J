@@ -3,7 +3,25 @@
     = $model->position
   - $thumb_path = YiiBase::getPathOfAlias( 'webroot.images.uploads.logos' ) . '/' . $model->logo
   .big-logo
-    = $model->logo ? CHtml::image( str_ireplace( 'index.php/', '', Yii::app()->image->createUrl( 'biglogo', $thumb_path ) ), null, array( 'title' => $model->company ) ) : ''
+    :php
+      if( $model->company_link )
+      {
+        if( $model->logo )
+        {
+            echo CHtml::link( CHtml::image( str_ireplace( 'index.php/', '', Yii::app()->image->createUrl( 'biglogo', $thumb_path ) ), null, array( 'title' => $model->company ) ), $model->company_link, array( 'target' => '_blank' ) );
+        }
+        else
+        {
+            echo CHtml::link( $model->company_link, $model->company_link, array( 'target' => '_blank' ) );
+        }
+      }
+      else
+      {
+        if( $model->logo )
+        {
+            echo CHtml::image( str_ireplace( 'index.php/', '', Yii::app()->image->createUrl( 'biglogo', $thumb_path ) ), null, array( 'title' => $model->company ) );
+        }
+      }
   .clear
   .job-info
     .info-label

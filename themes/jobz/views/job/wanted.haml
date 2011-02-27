@@ -1,0 +1,35 @@
+.inner-inner
+  %h1.position
+    Pick One
+  .clear
+  %p.inner-left-p
+    Please pick one of the following packages. While the site is in <b>beta</b>, we only have two packages to choose from. If you find a bug or something that is not working as expected, please
+    = CHtml::link( ' click here to let us know', $this->createUrl( 'site/contact' ) ) . '.'
+  %p.inner-left-p
+    Also, please make sure that you read the small-letter stuff on the bottom of the page.
+  %p.inner-left-p
+    <b>Why?</b>
+  %p.inner-left-p
+    Why would you want to advertise your position on this site? Because it looks awesome, it has no ads (we are planning to keep it that way), it is powered by <a href="http://yiiframework.com" target="_blank">Yii</a>, so you are supporting a site that is actually using the technology, compared to other <i>job sites</i> we are cheap, and because it looks awesome :)
+  .wanted-block
+    = CHtml::link( CHtml::image( Yii::app()->theme->baseUrl . '/images/99.jpg' ), $this->createUrl( 'site/contact' ), array( 'title' => 'Contact us for the details' ) )
+    %ul
+      %li
+        Your position will be up for <b>30 days</b>
+      %li
+        You'll get to be <b>on the top</b> of the listings
+      %li
+        You'll get a spot in the next <a href="http://yiiradiio.mehesz.net" target="_blank">Yii Radiio podcast</a> - <b>this is big</b>!
+      %li
+        We will post your <b>job in the forum</b> as well, so you won't have to
+      %li
+        We will <b>tweet</b> about your job
+  .wanted-block
+    = CHtml::link( CHtml::image( Yii::app()->theme->baseUrl . '/images/0.jpg' ), $this->createUrl( 'job/create' ), array( 'title' => 'Post a job, completely FREE!' ) )
+    %ul
+      %li
+        Your position will be up for <b>7 days</b>. That's pretty much it.
+  .clear
+  %p.toc
+    We are absolutely not responsible for the content of the site, but we have the right to remove any or all posted material with or without notice. If you don't like it, don't use it. Simple. If you have any questions, please don't hesitate to 
+    = CHtml::link( 'contact us', $this->createUrl( 'site/contact' ) ) . '.'

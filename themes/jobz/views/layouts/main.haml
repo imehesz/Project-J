@@ -27,7 +27,7 @@
       .header-top
       / header-top
       .header-bottom
-        = CHtml::image( Yii::app()->theme->baseUrl . '/images/yii-jobz.png' );
+        = CHtml::link( CHtml::image( Yii::app()->theme->baseUrl . '/images/yii-jobz.png' ), $this->createUrl( 'job/index' ) );
         .float-right.span-4.top-date
           = date( 'F, j', time() );
           = date( 'l', time() );
