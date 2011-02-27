@@ -8,3 +8,4 @@ protected/runtime/*
 *.sqlite
 development.php
 uploads
+.vim
