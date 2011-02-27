@@ -171,8 +171,8 @@ $(document).ready(function(){
 		$("#dwitter_user").tweet({
 			username: "allphpjobs",
 			join_text: "auto",
-			avatar_size: 25,
-			count: 3,
+			avatar_size: 16,
+			count: 5,
 			auto_join_text_default: "", 
 			auto_join_text_ed: "",
 			auto_join_text_ing: "",
