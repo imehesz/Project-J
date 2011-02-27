@@ -26,7 +26,7 @@
   .job-info
     .info-label
       Company: 
-    = $model->company
+    = $model->company_link ? CHtml::link( $model->company, $model->company_link, array( 'target' => '_blank' ) ) : $model->company
     .clear
 
     .info-label
