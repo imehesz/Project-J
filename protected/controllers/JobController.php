@@ -38,7 +38,7 @@ class JobController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'create', 'captcha'),
+				'actions'=>array('index','view', 'create', 'captcha', 'wanted' ),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -54,6 +54,11 @@ class JobController extends Controller
 			),
 		);
 	}
+
+    public function actionWanted()
+    {
+        $this->render( 'wanted' );
+    }
 
 	/**
 	 * Displays a particular model.

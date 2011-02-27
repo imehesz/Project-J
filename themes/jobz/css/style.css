@@ -30,6 +30,11 @@ h1.position
 	padding-left:85px;
 }
 
+.inner-left-p
+{
+    padding-left: 85px;
+}
+
 .container
 {
 	background: url( ../images/container-bg.jpg ) no-repeat #e9ddbf;
@@ -192,7 +197,8 @@ h1.position
 	float: static;
 }
 
-#job-form input
+/* #job-form input */
+input
 {
 	color: #4e3b26;
 	height: 30px;
@@ -292,4 +298,22 @@ input[type='textarea']
 	font-size: 18px;
 	font-style: normal;
 	letter-spacing: 3px;
+}
+
+.wanted-block
+{
+    float:left;
+    margin: 25px;
+    width: 250px;
+}
+
+.wanted-block li
+{
+    padding: 5px;
+}
+
+.toc
+{
+    font-size: 10px;
+    text-align: center;
 }

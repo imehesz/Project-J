@@ -20,12 +20,14 @@
 		<?php echo $form->labelEx($model,'contact_email'); ?>
 		<?php echo $form->textField($model,'contact_email',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'contact_email'); ?>
+		<p class="hint">Your email address will be shown to jobseekers.</p>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'company_link'); ?>
 		<?php echo $form->textField($model,'company_link',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'company_link'); ?>
+		<p class="hint">If provided, I link will be created on the job page. (ie: <i>http://mehesz.net</i>)</p>
 	</div>
 
 	<div class="row">
@@ -39,12 +41,14 @@
 		<?php echo $form->labelEx($model,'location'); ?>
 		<?php echo $form->textField($model,'location',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'location'); ?>
+		<p class="hint">ie: Washington DC, USA - Budapest, Hungary ... etc</p>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'position'); ?>
 		<?php echo $form->textField($model,'position',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'position'); ?>
+		<p class="hint">A short description of the job. (ie: Senior PHP Developer)</p>
 	</div>
 
 	<?php /*
