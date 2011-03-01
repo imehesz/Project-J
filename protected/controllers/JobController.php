@@ -101,7 +101,7 @@ class JobController extends Controller
 
 				if($model->save( false ))
 				{
-					$this->redirect(array('view','id'=>$model->id));
+					$this->redirect( $this->createUrl( 'job/view', array( 'id' => $model->id, 'title' => MUtility::strToPretty( $model->position ) ) ) );
 				}
 			}
 		}
