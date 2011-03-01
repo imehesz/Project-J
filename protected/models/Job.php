@@ -236,7 +236,7 @@ class Job extends CActiveRecord
 
                 $this->getDbCriteria()->mergeWith(
                     array(
-                        'condition' => $t . ' 1==1'
+                        'condition' => $t . ' 1=1'
                     )
                 );
             }
