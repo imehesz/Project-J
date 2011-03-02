@@ -188,7 +188,7 @@ h1.position
 {
 	color: #4e3b26;
 	font-size: 26px !important;
-	float: left;
+	/* float: left; */
 	width: 200px;
 }
 
